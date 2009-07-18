@@ -4,6 +4,7 @@
   <script src="http://yui.yahooapis.com/2.7.0/build/yahoo/yahoo-min.js"></script>
   <script src="http://yui.yahooapis.com/2.7.0/build/event/event-min.js"></script>
   <script src="http://yui.yahooapis.com/2.7.0/build/connection/connection-min.js"></script>
+  <script type="text/javascript" src="gears_init.js"></script>
   <style type="text/css">
     #map {
       width: 100%;
@@ -29,15 +30,31 @@
 
   google.load("maps", "2.x");
 
-  function found(position) {
-    lat = position.coords.latitude;
-    lon = position.coords.longitude;
+  function locate(lat, lon) {
     var latlon = "lat=" + lat + "&lon=" + lon;
     var transaction = YAHOO.util.Connect.asyncRequest('GET', "http://firebrowser.javarants.com/update?" + latlon, positionUpdated, null);
   }
 
+  function html5Locate(position) {
+    locate(lat = position.coords.latitude, lon = position.coords.longitude);
+  }
+
+  function gearsLocate(position) {
+    locate(lat = position.latitude, lon = lon = position.longitude);
+  }
+
   google.setOnLoadCallback(function() {
-    var geolocator = navigator.geolocation.getCurrentPosition(found);
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(html5Locate);
+    } else if (window.google && google.gears) {
+      var geo = google.gears.factory.create('beta.geolocation');
+      geo.getCurrentPosition(gearsLocate);
+    } else {
+      var cl = google.loader.ClientLocation;
+      if (cl) {
+        locate(lat = cl.latitude, lon = cl.longitude);
+      }
+    }
   });
 
   function createMap(lat, lng, location) {
