@@ -123,6 +123,10 @@ public class OAuthFilter implements Filter {
     } catch (OAuthException e) {
       // We have failed to authorize
       res.sendError(401, e.getMessage());
+      // Delete all the cookies just in case they try again
+      deleteCookie(res, "rt");
+      deleteCookie(res, "at");
+      deleteCookie(res, "ts");
       return;
     } catch (URISyntaxException e) {
       // Assertion error
