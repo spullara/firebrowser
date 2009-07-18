@@ -1,0 +1,47 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>firebrowser</groupId>
+  <artifactId>firebrowser</artifactId>
+  <packaging>war</packaging>
+  <version>1.0</version>
+  <name>firebrowser Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+  <repositories>
+    <repository>
+      <id>oauth</id>
+      <url>http://oauth.googlecode.com/svn/code/maven/</url>
+    </repository>
+  </repositories>
+  <dependencies>
+    <dependency>
+      <groupId>net.oauth</groupId>
+      <artifactId>oauth-core</artifactId>
+      <version>20090531</version>
+    </dependency>
+    <dependency>
+      <groupId>net.oauth.example</groupId>
+      <artifactId>oauth-consumer</artifactId>
+      <version>20090105</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>2.5</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-mapper-asl</artifactId>
+      <version>1.1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <finalName>firebrowser</finalName>
+  </build>
+</project>
