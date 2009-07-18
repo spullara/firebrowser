@@ -10,7 +10,11 @@
   </filter>
   <filter-mapping>
     <filter-name>oauth</filter-name>
-    <url-pattern>/*</url-pattern>
+    <url-pattern>*.jsp</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>oauth</filter-name>
+    <url-pattern>/update</url-pattern>
   </filter-mapping>
   <servlet>
     <servlet-name>update</servlet-name>

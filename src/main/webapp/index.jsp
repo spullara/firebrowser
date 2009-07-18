@@ -80,6 +80,8 @@
     map.setCenter(new google.maps.LatLng(lat, lng), 13);
     map.openInfoWindow(map.getCenter(), document.createTextNode(location));
   }
+
+  log("Initializing...");
 </script>
 </body>
 </html>
