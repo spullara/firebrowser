@@ -32,7 +32,7 @@
 
   function locate(lat, lon) {
     var latlon = "lat=" + lat + "&lon=" + lon;
-    var transaction = YAHOO.util.Connect.asyncRequest('GET', "http://firebrowser.javarants.com/update?" + latlon, positionUpdated, null);
+    var transaction = YAHOO.util.Connect.asyncRequest('GET', "http://browfire.com/update?" + latlon, positionUpdated, null);
   }
 
   function html5Locate(position) {
