@@ -70,15 +70,17 @@ public class OAuthFilter implements Filter {
     String rt = null;
     String ts = null;
     Cookie[] cookies = req.getCookies();
-    for (Cookie cookie : cookies) {
-      String key = cookie.getName();
-      String value = cookie.getValue();
-      if (key.equals("at")) {
-        at = value;
-      } else if (key.equals("rt")) {
-        rt = value;
-      } else if (key.equals("ts")) {
-        ts = value;
+    if (cookies != null) {
+      for (Cookie cookie : cookies) {
+        String key = cookie.getName();
+        String value = cookie.getValue();
+        if (key.equals("at")) {
+          at = value;
+        } else if (key.equals("rt")) {
+          rt = value;
+        } else if (key.equals("ts")) {
+          ts = value;
+        }
       }
     }
 

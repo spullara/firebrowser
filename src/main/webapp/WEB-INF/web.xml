@@ -12,4 +12,12 @@
     <filter-name>oauth</filter-name>
     <url-pattern>*.jsp</url-pattern>
   </filter-mapping>
+  <servlet>
+    <servlet-name>update</servlet-name>
+    <servlet-class>com.sampullara.firebrowser.UpdateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>update</servlet-name>
+    <url-pattern>/update</url-pattern>
+  </servlet-mapping>
 </web-app>
