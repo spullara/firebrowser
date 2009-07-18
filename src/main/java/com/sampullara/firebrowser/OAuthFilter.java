@@ -45,9 +45,9 @@ public class OAuthFilter implements Filter {
             "https://fireeagle.yahoo.net/oauth/authorize",
             "https://fireeagle.yahooapis.com/oauth/access_token");
     consumer = new OAuthConsumer(
-            "url",
-            "key",
-            "secret",
+            "http://browfire.com",
+            "QkVdB0VoUMeU",
+            "tdPZxeeN9xf1gMJZVtjea23BzkoDC0CS",
             provider);
   }
 

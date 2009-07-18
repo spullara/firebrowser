@@ -13,6 +13,7 @@
   </style>
 </head>
 <body>
+<div id="log"></div>
 <div id="map"></div>
 <script type="text/javascript"
         src="http://www.google.com/jsapi?key=ABQIAAAASc66tF1r_zj5Xg3AoYQcERQX4BOKJOcifbeh9S1UK70t9X27cBRFmgybjPbN3AS4eXEF8_nE1nY5-Q"></script>
@@ -22,9 +23,11 @@
 
   var positionUpdated = {
     success: function(o) {
+      document.getElementById("log").style.display = "none";
       createMap(lat, lon, "FireEagle updated!");
     },
     failure: function(o) {
+      log("Failed to update FireEagle location.");
     }
   }
 
@@ -32,6 +35,7 @@
 
   function locate(lat, lon) {
     var latlon = "lat=" + lat + "&lon=" + lon;
+    log("Located at " + lat + ", " + lon);
     var transaction = YAHOO.util.Connect.asyncRequest('GET', "http://browfire.com/update?" + latlon, positionUpdated, null);
   }
 
@@ -43,13 +47,23 @@
     locate(lat = position.latitude, lon = lon = position.longitude);
   }
 
+  function log(message) {
+    var p = document.createElement("p");
+    p.innerHTML = message;
+    document.getElementById("log").appendChild(p);
+  }
+
   google.setOnLoadCallback(function() {
+    log("Checking capabilities...");
     if (navigator.geolocation) {
+      log("HTML5 Geolocation API support");
       navigator.geolocation.getCurrentPosition(html5Locate);
     } else if (window.google && google.gears) {
+      log("Gears GeoLocation API support");
       var geo = google.gears.factory.create('beta.geolocation');
       geo.getCurrentPosition(gearsLocate);
     } else {
+      log("Falling back to Google ClientLocation using IP");
       var cl = google.loader.ClientLocation;
       if (cl) {
         locate(lat = cl.latitude, lon = cl.longitude);
