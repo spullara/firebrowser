@@ -1,5 +1,5 @@
 <html>
-<head><title>FireBrowser</title>
+<head><title>BrowFire</title>
   <!-- Dependency -->
   <script src="http://yui.yahooapis.com/2.7.0/build/yahoo/yahoo-min.js"></script>
   <script src="http://yui.yahooapis.com/2.7.0/build/event/event-min.js"></script>
@@ -15,7 +15,7 @@
 <body>
 <div id="map"></div>
 <script type="text/javascript"
-        src="http://www.google.com/jsapi?key=ABQIAAAASc66tF1r_zj5Xg3AoYQcERQ-aAkomW33b9jbcGp5OJNt_dzc5xRIpgil3bMcGN-m_TIcPyXoiM89Vg"></script>
+        src="http://www.google.com/jsapi?key=ABQIAAAASc66tF1r_zj5Xg3AoYQcERQX4BOKJOcifbeh9S1UK70t9X27cBRFmgybjPbN3AS4eXEF8_nE1nY5-Q"></script>
 <script type="text/javascript">
   var lat;
   var lon;

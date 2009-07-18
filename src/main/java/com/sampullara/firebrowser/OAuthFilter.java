@@ -45,9 +45,9 @@ public class OAuthFilter implements Filter {
             "https://fireeagle.yahoo.net/oauth/authorize",
             "https://fireeagle.yahooapis.com/oauth/access_token");
     consumer = new OAuthConsumer(
-            "",
-            "",
-            "",
+            "url",
+            "key",
+            "secret",
             provider);
   }
 
