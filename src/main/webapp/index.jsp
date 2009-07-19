@@ -13,18 +13,26 @@
   </style>
 </head>
 <body>
-<div id="log"></div>
+<div>
+<a href="http://www.javarants.com/2009/07/17/update-your-fireeagle-location-automatically-from-any-browser/">More information...</a>  
+</div>
 <div id="map"></div>
+<div id="log"></div>
 <script type="text/javascript"
         src="http://www.google.com/jsapi?key=ABQIAAAASc66tF1r_zj5Xg3AoYQcERQX4BOKJOcifbeh9S1UK70t9X27cBRFmgybjPbN3AS4eXEF8_nE1nY5-Q"></script>
 <script type="text/javascript">
   var lat;
   var lon;
+  var map;
 
   var positionUpdated = {
     success: function(o) {
-      document.getElementById("log").style.display = "none";
-      createMap(lat, lon, "FireEagle updated!");
+      if (map != undefined) {
+        createMap(lat, lon, "FireEagle updated!");
+      } else {
+        map.setCenter(new google.maps.LatLng(lat, lon), 13);
+        map.openInfoWindow(map.getCenter(), document.createTextNode(location));
+      }
     },
     failure: function(o) {
       log("Failed to update FireEagle location.");
@@ -53,15 +61,19 @@
     document.getElementById("log").appendChild(p);
   }
 
+  function errorHandler(error) {
+    log(error.message);
+  }
+
   google.setOnLoadCallback(function() {
     log("Checking capabilities...");
     if (navigator.geolocation) {
       log("HTML5 Geolocation API support");
-      navigator.geolocation.getCurrentPosition(html5Locate);
+      navigator.geolocation.watchPosition(html5Locate, errorHandler, {maximumAge:600000});
     } else if (window.google && google.gears) {
       log("Gears GeoLocation API support");
       var geo = google.gears.factory.create('beta.geolocation');
-      geo.getCurrentPosition(gearsLocate);
+      geo.watchPosition(gearsLocate, errorHandler, {maximumAge:600000});
     } else {
       log("Falling back to Google ClientLocation using IP");
       var cl = google.loader.ClientLocation;
@@ -74,7 +86,7 @@
   function createMap(lat, lng, location) {
     var mapElement = document.getElementById("map");
     mapElement.style.display = 'block';
-    var map = new google.maps.Map2(mapElement);
+    map = new google.maps.Map2(mapElement);
     map.addControl(new GLargeMapControl());
     map.addControl(new GMapTypeControl());
     map.setCenter(new google.maps.LatLng(lat, lng), 13);
