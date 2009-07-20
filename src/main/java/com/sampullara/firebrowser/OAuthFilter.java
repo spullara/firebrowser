@@ -45,9 +45,9 @@ public class OAuthFilter implements Filter {
             "https://fireeagle.yahoo.net/oauth/authorize",
             "https://fireeagle.yahooapis.com/oauth/access_token");
     consumer = new OAuthConsumer(
-            "http://firebrowser.javarants.com/",
-            "Ex842OXvoXUg",
-            "0Nr3vlMRRy7308ylRzJTP7h5Fgyvuqs6",
+            "url",
+            "key",
+            "secret",
             provider);
   }
 
@@ -123,6 +123,10 @@ public class OAuthFilter implements Filter {
     } catch (OAuthException e) {
       // We have failed to authorize
       res.sendError(401, e.getMessage());
+      // Delete all the cookies just in case they try again
+      deleteCookie(res, "rt");
+      deleteCookie(res, "at");
+      deleteCookie(res, "ts");
       return;
     } catch (URISyntaxException e) {
       // Assertion error
